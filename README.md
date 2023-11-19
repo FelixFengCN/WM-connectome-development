@@ -1,7 +1,7 @@
 # WM-connectome-devlopment
 This repository provides data and code for reproducing a range of analyses involving our study.
 If you use these data and code, please cite our paper:
-Guozheng Feng, Rui Chen, Rui Zhao, et al. Longitudinal development of brain white matter structural connectome and its association with transcriptomic and cellular architecture.
+Guozheng Feng, Rui Chen, Rui Zhao, et al. Longitudinal development of the human white matter structural connectome and its association with brain transcriptomic and cellular architecture. Communications Biology.
 
 ### Dependencies:
 The lmer function in R4.1.2 software (https://www.r-project.org/) is used to perform mixed effect model. 
