@@ -1,0 +1,12 @@
+FMRIB’s Diffusion Toolbox of the FMRIB Software Library v6.0. 
+eddy_correct dti.nii.gz eddyDti.nii.gz 0
+fslroi eddyDti.nii.gz b0.nii.gz 0 1
+bet b0.nii.gz betb0.nii.gz -m -f 0.1
+dtifit -k eddyDti.nii.gz -o dtifit -m betb0mask.nii.gz -r bvecs -b bvals
+flirt -in betb0.nii.gz -ref betT1.nii.gz -out b02T1.nii.gz -omat b02T1_omat
+convert_xfm -omat b02T1_omat_inv -inverse b02T1_omat
+flirt -in betT1.nii.gz -init b02T1_omat_inv -ref betb0.nii.gz -out T12b0.nii.gz -applyxfm
+flirt -in betT1.nii.gz -ref atlas.nii -omat T12atlas_omat
+fnirt --in=betT1.nii.gz  --ref=atlas.nii --aff=T12atlas_omat --cout=T12atlas_nonlinear --iout=T12atlas.nii.gz
+invwarp -w T12atlas_nonlinear -r betT1.nii.gz  -o T12atlas_nonlinear_inv
+applywarp -i BNA246.nii -o BNA246_native.nii.gz -r T12b0.nii.gz -w T12MNI_nonlinear_inv --postmat=b02T1_omat_inv --interp=nn
