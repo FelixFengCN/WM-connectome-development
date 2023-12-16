@@ -72,11 +72,7 @@ PLS1sw=std(PLS1weights');
 %z-score weights
 temp1=PLS1w./PLS1sw';
 [Z1,ind1]=sort(temp1,'descend');
-OrderedGeneSymbol=genesSymbol(ind1);
-OrderedGeneID=geneID(ind1);
-Z1_p=ones(size(Z1))*0.5;
-Z1_p(Z1>0)=1-normcdf(Z1(Z1>0));
-Z1_p(Z1<0)=normcdf(Z1(Z1<0));
+
 
 
 
